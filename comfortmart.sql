@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2019 at 06:59 PM
+-- Generation Time: Sep 28, 2019 at 06:43 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -84,10 +84,16 @@ CREATE TABLE `customer` (
   `Customer_name` varchar(50) NOT NULL,
   `Customer_Email` varchar(50) NOT NULL,
   `Customer_Number` int(15) NOT NULL,
-  `Customer_Username` varchar(50) NOT NULL,
   `Customer_Password` varchar(50) NOT NULL,
-  `Customer_Address` varchar(50) NOT NULL
+  `Customer_Address` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`Customer_Id`, `Customer_name`, `Customer_Email`, `Customer_Number`, `Customer_Password`, `Customer_Address`) VALUES
+(1, 'sultan', 'sultan@gmail.com', 2147483647, '12345', NULL);
 
 -- --------------------------------------------------------
 
@@ -303,9 +309,9 @@ ALTER TABLE `customer`
 ALTER TABLE `customer_order_history`
   ADD PRIMARY KEY (`Order_History_Id`),
   ADD UNIQUE KEY `order` (`Order_Id`),
-  ADD UNIQUE KEY `customer` (`Customer_Id`),
   ADD UNIQUE KEY `orderdate` (`Order_Date`),
-  ADD UNIQUE KEY `invoice` (`Invoice_Amount`);
+  ADD UNIQUE KEY `invoice` (`Invoice_Amount`),
+  ADD UNIQUE KEY `Customer_Id` (`Customer_Id`);
 
 --
 -- Indexes for table `deliver_order`
@@ -335,7 +341,7 @@ ALTER TABLE `invoice_type`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`Order_Id`),
-  ADD UNIQUE KEY `Customer_FK` (`Customer_Id`);
+  ADD UNIQUE KEY `Customer_Id` (`Customer_Id`);
 
 --
 -- Indexes for table `order_item`
@@ -373,7 +379,7 @@ ALTER TABLE `product_category`
 --
 ALTER TABLE `shipping`
   ADD PRIMARY KEY (`shipping_Id`),
-  ADD UNIQUE KEY `cus_shipping` (`Customer_Id`);
+  ADD UNIQUE KEY `Customer_Id` (`Customer_Id`);
 
 --
 -- Indexes for table `shipping_information`
@@ -381,7 +387,7 @@ ALTER TABLE `shipping`
 ALTER TABLE `shipping_information`
   ADD PRIMARY KEY (`shipping_Info_Id`),
   ADD UNIQUE KEY `shipping_Info` (`shipping_Id`),
-  ADD UNIQUE KEY `customer_Info` (`Customer_Id`);
+  ADD UNIQUE KEY `Customer_Id` (`Customer_Id`);
 
 --
 -- Indexes for table `stock`
@@ -399,6 +405,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `Customer_Id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deliver_order`
@@ -435,10 +447,70 @@ ALTER TABLE `shipping_information`
 --
 
 --
+-- Constraints for table `budget_recommendation`
+--
+ALTER TABLE `budget_recommendation`
+  ADD CONSTRAINT `budget_recommendation_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`),
+  ADD CONSTRAINT `budget_recommendation_ibfk_2` FOREIGN KEY (`Ip_Address`) REFERENCES `user` (`Ip_Address`);
+
+--
+-- Constraints for table `customer_order_history`
+--
+ALTER TABLE `customer_order_history`
+  ADD CONSTRAINT `customer_order_history_ibfk_1` FOREIGN KEY (`Customer_Id`) REFERENCES `customer` (`Customer_Id`);
+
+--
+-- Constraints for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`Invoice_Type_Id`) REFERENCES `invoice_type` (`Invoice_Type_Id`),
+  ADD CONSTRAINT `invoice_ibfk_2` FOREIGN KEY (`Customer_Id`) REFERENCES `customer` (`Customer_Id`),
+  ADD CONSTRAINT `invoice_ibfk_3` FOREIGN KEY (`Order_Id`) REFERENCES `order` (`Order_Id`);
+
+--
+-- Constraints for table `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`Customer_Id`) REFERENCES `customer` (`Customer_Id`);
+
+--
 -- Constraints for table `order_item`
 --
 ALTER TABLE `order_item`
-  ADD CONSTRAINT `order_item_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`);
+  ADD CONSTRAINT `order_item_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`),
+  ADD CONSTRAINT `order_item_ibfk_2` FOREIGN KEY (`Order_Id`) REFERENCES `order` (`Order_Id`);
+
+--
+-- Constraints for table `product_attributes`
+--
+ALTER TABLE `product_attributes`
+  ADD CONSTRAINT `product_attributes_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`);
+
+--
+-- Constraints for table `product_category`
+--
+ALTER TABLE `product_category`
+  ADD CONSTRAINT `product_category_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`),
+  ADD CONSTRAINT `product_category_ibfk_2` FOREIGN KEY (`Admin_Id`) REFERENCES `admin` (`Admin_Id`);
+
+--
+-- Constraints for table `shipping`
+--
+ALTER TABLE `shipping`
+  ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`Customer_Id`) REFERENCES `customer` (`Customer_Id`);
+
+--
+-- Constraints for table `shipping_information`
+--
+ALTER TABLE `shipping_information`
+  ADD CONSTRAINT `shipping_information_ibfk_1` FOREIGN KEY (`Customer_Id`) REFERENCES `customer` (`Customer_Id`),
+  ADD CONSTRAINT `shipping_information_ibfk_2` FOREIGN KEY (`shipping_Id`) REFERENCES `shipping` (`shipping_Id`);
+
+--
+-- Constraints for table `stock`
+--
+ALTER TABLE `stock`
+  ADD CONSTRAINT `stock_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
