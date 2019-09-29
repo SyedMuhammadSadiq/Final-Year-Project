@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2019 at 06:43 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: Sep 29, 2019 at 09:13 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -288,7 +288,8 @@ ALTER TABLE `budget_recommendation`
   ADD UNIQUE KEY `product1` (`Product_Id`),
   ADD UNIQUE KEY `product2` (`Product_Price`),
   ADD UNIQUE KEY `product3` (`Product_Quantity`),
-  ADD UNIQUE KEY `User` (`Ip_Address`);
+  ADD UNIQUE KEY `User` (`Ip_Address`),
+  ADD UNIQUE KEY `Product_Category_Id` (`Product_Category_Id`);
 
 --
 -- Indexes for table `category_attributes`
@@ -357,7 +358,8 @@ ALTER TABLE `order_item`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`Product_Id`),
   ADD UNIQUE KEY `brand_pro` (`Brand_Id`),
-  ADD UNIQUE KEY `cus_product` (`Admin_Id`);
+  ADD UNIQUE KEY `cus_product` (`Admin_Id`),
+  ADD UNIQUE KEY `Product_Category_Id` (`Product_Category_Id`);
 
 --
 -- Indexes for table `product_attributes`
@@ -447,17 +449,37 @@ ALTER TABLE `shipping_information`
 --
 
 --
+-- Constraints for table `brand`
+--
+ALTER TABLE `brand`
+  ADD CONSTRAINT `brand_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`);
+
+--
 -- Constraints for table `budget_recommendation`
 --
 ALTER TABLE `budget_recommendation`
   ADD CONSTRAINT `budget_recommendation_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`),
-  ADD CONSTRAINT `budget_recommendation_ibfk_2` FOREIGN KEY (`Ip_Address`) REFERENCES `user` (`Ip_Address`);
+  ADD CONSTRAINT `budget_recommendation_ibfk_2` FOREIGN KEY (`Ip_Address`) REFERENCES `user` (`Ip_Address`),
+  ADD CONSTRAINT `budget_recommendation_ibfk_3` FOREIGN KEY (`Product_Category_Id`) REFERENCES `product_category` (`Product_Category_Id`);
+
+--
+-- Constraints for table `category_attributes`
+--
+ALTER TABLE `category_attributes`
+  ADD CONSTRAINT `category_attributes_ibfk_1` FOREIGN KEY (`Product_Category_Id`) REFERENCES `product_category` (`Product_Category_Id`);
 
 --
 -- Constraints for table `customer_order_history`
 --
 ALTER TABLE `customer_order_history`
   ADD CONSTRAINT `customer_order_history_ibfk_1` FOREIGN KEY (`Customer_Id`) REFERENCES `customer` (`Customer_Id`);
+
+--
+-- Constraints for table `deliver_order`
+--
+ALTER TABLE `deliver_order`
+  ADD CONSTRAINT `deliver_order_ibfk_1` FOREIGN KEY (`shipping_Id`) REFERENCES `shipping` (`shipping_Id`),
+  ADD CONSTRAINT `deliver_order_ibfk_2` FOREIGN KEY (`Order_Id`) REFERENCES `order` (`Order_Id`);
 
 --
 -- Constraints for table `invoice`
@@ -479,6 +501,14 @@ ALTER TABLE `order`
 ALTER TABLE `order_item`
   ADD CONSTRAINT `order_item_ibfk_1` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_Id`),
   ADD CONSTRAINT `order_item_ibfk_2` FOREIGN KEY (`Order_Id`) REFERENCES `order` (`Order_Id`);
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Brand_Id`) REFERENCES `brand` (`Brand_Id`),
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`Product_Category_Id`) REFERENCES `product_category` (`Product_Category_Id`),
+  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`Admin_Id`) REFERENCES `admin` (`Admin_Id`);
 
 --
 -- Constraints for table `product_attributes`
