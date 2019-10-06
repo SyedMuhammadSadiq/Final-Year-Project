@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SignUp</title>
+		   <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<style type="text/css">
+			.innerbox
+			{
+			   width:400px; /* or whatever width you want. */
+			   max-width:400px; /* or whatever width you want. */
+			   display: inline-block;
+			   padding: 15px;
+			   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+			   margin-top: 20px;
+			}
+		
+			</style>
+</head>
+
+<body>
+	<div class="container">
+   	  <div class="row">
+
+         <div class="col-md-4"></div>
+		 	<div class="col-md-4">
+	<form action="server/signup.php" method="POST" class="form-group innerbox">
+		<h2 class="text-center">Create new account</h2><br>
+		<label for="name" class="control-label">Name: </label>
+			<input type="name" name="Customer_name" id="name" placeholder="Enter your name" required class="form-control"> <br>
+		
+		<label for="email" class="control-label">Email Address: </label>
+			<input type="email" name="Customer_Email" id="email" placeholder="Enter your email" required class="form-control"> <br>
+	
+		<label for="phone" class="control-label">Contact No: </label>
+			<input type="number" name="Customer_Number" id="phone" placeholder="Enter your number" required class="form-control"> <br>
+		
+		<label for="password" class="control-label">Password:	</label>
+			<input type="password" name="Customer_Password" id="password" placeholder="Enter your password" required class="form-control"> <br>
+	
+		<label for="password" class="control-label">Confirm Password:	</label>
+			<input type="password" name="cpassword" id="cpassword" placeholder="Enter your confirm password" required class="form-control"> <br>
+
+		<input type="submit" name="submit" class="btn btn-primary" value="Submit" onclick="return Validate()">
+		<p>Already a member? <a href="login.html">Login</a></p>
+	</form>
+			    </div>
+         <div class="col-md-4"></div>	 
+ 	  </div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+  function Validate() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("cpassword").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
