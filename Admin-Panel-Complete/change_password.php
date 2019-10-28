@@ -13,7 +13,7 @@
 		if($data_pass==$old_pass){
 		if($new_pass==$re_pass){
 			$update_pwd=mysqli_query($conn,"UPDATE admin set admin_password='$new_pass' where admin_id='1'");
-			echo "<script>alert('Update Password Sucessfully'); window.location='adminpanel.php'</script>";
+			echo "<script>alert('Update Password Sucessfully'); window.location='index.php'</script>";
 		}
 		else{
 			echo "<script>alert('Your new and Retype Password is not match'); window.location='change_password.php'</script>";
