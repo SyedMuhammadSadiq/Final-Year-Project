@@ -57,7 +57,7 @@
 			<div class="agile_top_brands_grids">
 	
 			<?php
-			$connect = mysqli_connect("localhost", "root", "", "userregister");
+			include('classes/config.php');
 
 				$query = "SELECT * FROM products ORDER BY product_name ASC";
 				$result = mysqli_query($connect, $query);
