@@ -78,7 +78,7 @@ while($row=mysqli_fetch_array($query))
 											<td><?php echo  $row['order_address'];?></td>
 
 											<td><?php echo $row['productname'];?></td>
-											<!--<td><?php //echo htmlentities($row['productimage']);?></td>-->
+											<!--<td><?php //echo $row['productimage'];?></td>-->
 											<td><?php echo $row['quantity'];?></td>
 											<td><?php echo $row['quantity']*$row['productprice'];?></td>
 											<td><?php echo $row['order_payment_method'];?></td>
