@@ -82,7 +82,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                     <?php if (count($item['childrens']) > 0) { ?>
                                         <li class="dropdown menu-item"> 
                                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                                <i class="icon fa fa-shopping-bag" aria-hidden="true"></i><?php echo $item['name'] ?>
+                                                <i aria-hidden="true"></i><?php echo $item['name'] ?>
                                             </a>
                                             <ul class="dropdown-menu mega-menu">
                                                 <li class="yamm-content">
@@ -107,73 +107,74 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                         </nav>
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-9 sidebar">
+                  <?php if (!empty($all_products['result'])) { ?>
+                  <section class="section featured-product wow fadeInUp">
+                  <h3 class="section-title">New products</h3>
+                  <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+                      <?php foreach ($all_products['result'] as $key => $value) { ?>
+                      <div class="item item-carousel">
+                          <div class="products">
+                              <div class="product">
+                                  <div class="product-image">
+                                      <div class="image">
+                                          <a href="javascript:void(0);">
+                                         <!-- product image get -->   <img src="admin/product_images/<?php echo($value->image); ?>">
+                                          </a>
+                                      </div>
+                                  </div>
+                                  <div class="product-info text-left">
+    
+                                    <!-- product name get -->    <h3 class="name"><a href="javascript:void(0);"><?php echo $value->name; ?></a></h3>
+                                      <div class="rating rateit-small"></div>
+                                      <div class="description"></div>
+                                      <div class="product-price"> 
+                                    <!-- product price get -->      <span class="price"><?php echo $value->price; ?>&nbsp;PKR</span> 
+                                        <!-- <span class="price-before-discount">$800</span>  -->
+                                      </div>
+                                  </div>
+                                  <!-- /.product-info -->
+                                  <div class="cart clearfix animate-effect">
+                                      <div class="action">
+                                          <ul class="list-unstyled">
+                                              <li  class="lnk wishlist" >
+
+                                           
+                                                  <a class="add-to-cart" href="category.php?page=product&action=add&id=<?php echo $value->id; ?>" title="Add to cart"><i class="fa fa-shopping-cart"></i> </a>
+                                              </li>
+
+                                              <li class="lnk wishlist">
+                                                  <a class="add-to-cart" href="javascript:void(0);" title="Wishlist"> <i class="icon fa fa-heart"></i> </a>
+                                              </li>
+                                              
+                                          </ul>
+                                      </div>
+                                      <!-- /.action -->
+                                  </div>
+                                  <!-- /.cart -->
+                              </div>
+                          </div>
+                      </div>
+                      <?php } ?>
+                  </section>
+          </div>
+      <?php } else { ?>
+        <div class="container">
+          <div class="row">
+          <div class="alert alert-info">
+            No product(s) available
+          </div>
+          </div>
+        </div>
+      <?php } ?>
+                </div>
+
                 <?php } ?>
             </div>
         </div>
 
         <!-- products -->
-        <?php if (!empty($all_products['result'])) { ?>
-	        <div class="container">
-	            <section class="section featured-product wow fadeInUp">
-	                <h3 class="section-title">New products</h3>
-	                <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-	                    <?php foreach ($all_products['result'] as $key => $value) { ?>
-	                    <div class="item item-carousel">
-	                        <div class="products">
-	                            <div class="product">
-	                                <div class="product-image">
-	                                    <div class="image">
-	                                        <a href="javascript:void(0);">
-	                                       <!-- product image get --> 	<img src="admin/product_images/<?php echo($value->image); ?>">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="product-info text-left">
-		
-	                                  <!-- product name get -->    <h3 class="name"><a href="javascript:void(0);"><?php echo $value->name; ?></a></h3>
-	                                    <div class="rating rateit-small"></div>
-	                                    <div class="description"></div>
-	                                    <div class="product-price"> 
-	                                  <!-- product price get -->    	<span class="price"><?php echo $value->price; ?>&nbsp;PKR</span> 
-	                                    	<!-- <span class="price-before-discount">$800</span>  -->
-	                                    </div>
-	                                </div>
-	                                <!-- /.product-info -->
-	                                <div class="cart clearfix animate-effect">
-	                                    <div class="action">
-	                                        <ul class="list-unstyled">
-	                                            <li  class="lnk wishlist" >
-
-	                                         
-	                                                <a class="add-to-cart" href="category.php?page=product&action=add&id=<?php echo $value->id; ?>" title="Add to cart"><i class="fa fa-shopping-cart"></i> </a>
-	                                            </li>
-
-	                                            <li class="lnk wishlist">
-	                                                <a class="add-to-cart" href="javascript:void(0);" title="Wishlist"> <i class="icon fa fa-heart"></i> </a>
-	                                            </li>
-	                                            
-	                                        </ul>
-	                                    </div>
-	                                    <!-- /.action -->
-	                                </div>
-	                                <!-- /.cart -->
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <?php } ?>
-	                </div>
-	            </section>
- 
-	        </div>
-    	<?php } else { ?>
-    		<div class="container">
-    			<div class="row">
-					<div class="alert alert-info">
-						No product(s) available
-					</div>
-    			</div>
-    		</div>
-    	<?php } ?>
+       
 
 <!-- new page for products -->
 
@@ -418,8 +419,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                     <div class="products">
                       <div class="product">
                         <div class="product-image">
-                          <div class="image img-responsive"> <a href="javascript:void(0);">
-                            <img src="admin/product_images/<?php echo($value->image); ?>">
+                          <div class="image> <a href="javascript:void(0);">
+                            <img class="img-responsive" src="admin/product_images/<?php echo($value->image); ?>">
                                               </a> 
                           </div>
                           <!-- /.image -->

@@ -1,32 +1,5 @@
 
-/*
-Theme Name: Boxshop
-Author: ThemesGround
-Description:  Boxshop HTML Template
-Version: 1.4
-License: GNU General Public License v2 or later
-Tags: two-columns, left-sidebar, fixed-layout, responsive-layout, custom-background, custom-colors, custom-header, custom-menu
-Text Domain:  Boxshop
 
-/* TABLE OF CONTENTS
-
-1.   Body
-2.   Layout
-3.   Header
-4.   Side menu
-5.   Slider
-6.   Top Banner Section 
-8.   Home Tabs
-9.   Products Grid 
-10.  Products List
-11.  Latest-Blog
-12.  Sidebar
-13.  Product View
-14.  Footer
-15.  Responsive
-16.  Testimonials
-
-/* */
 /*===================================================================================*/
 /*  Body
 /*===================================================================================*/
@@ -2840,7 +2813,11 @@ age-container #owl-main .owl-next {
 .product {
   position: relative;
 }
-.product .product-image img {width:100%}
+.product .product-image img {
+  width:200px;
+  height: 200px;
+
+}
 
 .product .product-image .tag {
   position: absolute;
