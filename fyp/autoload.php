@@ -1,7 +1,7 @@
 <?php
 
 	// Start Application Session
-	session_start();
+	//session_start();
 
 	ini_set('post_max_size', '1000M');
 	ini_set('max_input_vars', '100000');

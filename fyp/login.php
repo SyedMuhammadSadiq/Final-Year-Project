@@ -83,6 +83,7 @@
    }
 
    if (isset($_POST['login'])) {
+
       $isLogin = true;
       $errors = [];
       if (!empty($_POST['email'])) {
@@ -102,67 +103,12 @@
 
          $user = new user();
          if ($user->login($_POST['email'], $_POST['password'])) {
-            //header('location: index.php');  exit;
-         if(!empty($_SESSION['cart'])){
-        /// If register have items in cart ///
-        if (isset($_SESSION)) {
-            header('location: checkout.php');
-           }else{
-            session_start();
-            $_SESSION['email']=$user;
-            header('location: checkout.php');
-           }
-        // echo "<script>alert('You have been Registered Sucessfully moid')</script>";
-
-               
-    }   
-
-
- 
-
-
-
-
-
-
-
-
-    else{
-
-        /// If register without items in cart ///
-
-         if (isset($_SESSION)) {
-            if (isset($_GET['home'])) {
-            header("Refresh:0");
-            }else if(!isset($_GET['home'])){
-            header('location: checkout.php');
-            }
-           }else{
-            session_start();
-            $_SESSION['email']=$user;
-            if (isset($_GET['home'])) {
-            header("Refresh:0");
-            }else if(!isset($_GET['home'])){
-            header('location: checkout.php');
-            }
-
-           } 
             
-            
-        echo "<script>alert('You have been Registered Sucessfully')</script>";
-        
-        echo "<script>window.open('index.php','_self')</script>";
-
-        
-    }
-            
-            
+            header('location: index.php');  exit;
             
          }
            
-            else if (!empty($_SESSION['cart'])){
-               header('location: checkoutssss.php'); 
-            }
+           
 
 
           else {
@@ -213,7 +159,7 @@
                            }
                         }
                      ?>
-                     <form  action="login.php<?= (isset($_GET['home'])) ? '?home=true' : ''; ?>" method="POST" class="register-form outer-top-xs" role="form">
+                     <form  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="register-form outer-top-xs" role="form">
                         <div class="form-group">
                            <label class="info-title" for="email">Email <span>*</span></label>
                            <input type="email" name="email" class="form-control" id="email">

@@ -1,7 +1,7 @@
 <?php 
 session_start();
- $conn = mysqli_connect("localhost", "root", "", "comfort_mart");
-  if(isset($_POST['submit'])){
+error_reporting(0);
+$conn = mysqli_connect("localhost", "root", "", "comfort_mart"); if(isset($_POST['submit'])){
 		if(!empty($_SESSION['cart'])){
 		foreach($_POST['quantity'] as $key => $val){
 			if($val==0){
@@ -43,15 +43,13 @@ else{
 	$value=array_combine($pdd,$quantity);
 
 
-		foreach($value as $qty=> $qtyvalue){
+		foreach($value as $qty=> $val34){
 
 
 
-mysqli_query($conn,"INSERT into orders(userId,productId,quantity) values('".$_SESSION['id']."','$qty','$qtyvalue')");
- 
-
+mysqli_query($conn,"insert into orders(userId,productId,quantity) values('".$_SESSION['id']."','$qty','$val34')");
 header('location:checkout.php');
- }
+}
 }
 }
 
@@ -196,9 +194,7 @@ if(!empty($_SESSION['cart'])){
 						</a>
 					</td>
 					<td class="cart-product-name-info">
-						<h4 class='cart-product-description' ><a href="product-details.php?pid=<?php echo htmlentities($pd=$row['id']);?>" ><?php echo $row['name'];  
-							//$pname=$row['name'];
-						
+						<h4 class='cart-product-description' ><a href="product-details.php?pid=<?php echo htmlentities($pd=$row['id']);?>" ><?php echo $row['name'];
 
 $_SESSION['sid']=$pd;
 						 ?></a></h4>

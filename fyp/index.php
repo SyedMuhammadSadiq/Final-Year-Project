@@ -33,12 +33,12 @@
                                     <?php if (count($item['childrens']) > 0) { ?>
                                         <li class="dropdown menu-item"> 
                                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                                <i class="icon fa fa-shopping-bag" aria-hidden="true"></i><?php echo $item['name'] ?>
+                                                <i class="" aria-hidden="true"></i><?php echo $item['name'] ?>
                                             </a>
                                             <ul class="dropdown-menu mega-menu">
                                                 <li class="yamm-content">
                                                     <div class="row">
-                                                        <div class="col-sm-12 col-md-3">
+                                                        <div class="col-sm-12 col-md-12">
                                                             <ul class="links list-unstyled">
                                                                 <?php foreach ($item['childrens'] as $child) { ?>
                                                                     <li><a href='category.php?id=<?php echo $child->id; ?>'><?php echo $child->name; ?></a></li>

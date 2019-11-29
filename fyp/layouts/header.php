@@ -93,10 +93,10 @@
                            <?php if (isset($_SESSION['user'])) { ?>
                                 <li><a href="customer/my_account.php"><i class="icon fa fa-user"></i>My Account</a></li>
                                 <li><a href="my-cart.php"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                                <li><a href="order-history.php"><i class="icon fa fa-shopping-cart"></i>Order History</a></li>
+                                <li><a href="javascript:void(0);"><i class="icon fa fa-shopping-cart"></i>Order History</a></li>
                                 <li><a href="javascript:void(0);" onclick="logout()"><i class="fa fa-power-off"></i>&nbsp;Logout</a></li>
                             <?php } else { ?>
-                                <li><a href="login.php?home=true"><i class="icon fa fa-lock"></i>Login</a></li>
+                                <li><a href="login.php"><i class="icon fa fa-lock"></i>Login</a></li>
                              <?php }   ?>
                         </ul>  
 
@@ -158,13 +158,7 @@
                                 <div class="control-group">
                                     <ul class="categories-filter animate-dropdown">
                                         <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li class="menu-header">Computer</li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Clothing</a></li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Electronics</a></li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Shoes</a></li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Watches</a></li>
-                                            </ul>
+                                           
                                         </li>
                                     </ul>
                                     <input class="search-field" placeholder="Search here..." />
@@ -175,11 +169,171 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
                         <div class="dropdown dropdown-cart">
- 
+<!--
+
+<?php
+//if(!empty($_SESSION['cart'])){
+    ?>
+
+
+
+
+                            <a href="javascript:void(0);" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+                                <div class="items-cart-inner">
+                                    <div class="basket"></div>
+                                    <div class="basket-item-count"><span class="count"> <?php //echo $_SESSION['qnty'];?></span></div>
+                                    <div class="total-price-basket"> <span class="lbl"></span> <span class="total-price"> <span class="sign">Rs.</span><span class="value">  <?php //echo $_SESSION['tp']; ?></span> </span>
+                                    </div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+
+
+
+<?php
+// $conn = mysqli_connect("localhost", "root", "", "comfort_mart");  
+//    $sql = "SELECT * FROM products WHERE id IN(";
+//            foreach($_SESSION['cart'] as $id => $value){
+//            $sql .=$id. ",";
+ //           }
+//            $sql=substr($sql,0,-1) . ") ORDER BY id ASC";
+//            $query = mysqli_query($conn,$sql);
+//            $totalprice=0;
+//            $totalqunty=0;
+//            if(!empty($query)){
+//            while($row = mysqli_fetch_array($query)){
+//                $quantity=$_SESSION['cart'][$row['id']]['quantity'];
+//                $subtotal= $_SESSION['cart'][$row['id']]['quantity']*$row['price'];
+ //               $totalprice += $subtotal;
+ //               $_SESSION['qnty']=$totalqunty+=$quantity;
+
+    ?>
+
+
+
+
+
+
+
+                                <li>
+                                    <div class="cart-item product-summary">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="image">
+                                                    <a href="detail.html"><img src="assets/images/cart.jpg" alt="">   
+
+                                              <img  src="fyp/productimages/<?php //echo $row['id'];?>/<?php// echo $row['image'];?>" width="35" height="50" alt="">
+
+
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <h3 class="name"><a href="index8a95.html?page-detail">Simple Product <a href="index.php?page-detail"><?php //echo $row['name']; ?></a></a></h3>
+                                                <div class="price">$600.00 <?php// echo ($row['price'])  ?>*<?php// echo $_SESSION['cart'][$row['id']]['quantity']; ?></div>
+                                            </div>
+                                            <div class="col-xs-1 action"> <a href="javascript:void(0);"><i class="fa fa-trash"></i></a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <div class="clearfix cart-total">
+                                        <div class="pull-right"> <span class="text">Total Total :</span><span class='price'>$600.00 <?php //echo $_SESSION['tp']="$totalprice". ".00"; ?></span> </div>
+                                        <div class="clearfix"></div>
+                                        <a href="cart.php" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> 
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php// }  //else{   ?>
+<div class="dropdown dropdown-cart">
+        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+            <div class="items-cart-inner">
+                <div class="total-price-basket">
+                    <span class="lbl">cart -</span>
+                    <span class="total-price">
+                        <span class="sign">Rs.</span>
+                        <span class="value">00.00</span>
+                    </span>
+                </div>
+                <div class="basket">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                </div>
+                <div class="basket-item-count"><span class="count">0</span></div>
+            
+            </div>
+        </a>
+        <ul class="dropdown-menu">
+        
+    
+        
+        
+            <li>
+                <div class="cart-item product-summary">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            Your Shopping Cart is Empty.
+                        </div>
+                        
+                        
+                    </div>
+                </div>//.cart-item
+            
+                
+            <hr>
+        
+            <div class="clearfix cart-total">
+                
+                <div class="clearfix"></div>
+                    
+                <a href="index.php" class="btn btn-upper btn-primary btn-block m-t-20">Continue Shooping</a>    
+            </div>//.cart-total
+                    
+                
+        </li>
+        </ul>//.dropdown-menu
+    </div>
+    <?php //}?>
+
+
+
+
+
+-->
+
+
+                <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 <?php
 if(!empty($_SESSION['cart'])){
     ?>
-    
+   <!-- <div class="dropdown dropdown-cart">
+        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+            <div class="items-cart-inner">
+                <div class="total-price-basket">
+                    <span class="lbl">My cart -</span>
+                    <span class="total-price">
+                        <span class="sign">PKR: </span>
+                        <span class="value"><?php// echo $_SESSION['tp']; ?></span>
+                        
+                    </span>
+                </div>
+                <div class="basket">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                </div>
+                <div class="basket-item-count" ><span class="count"><?php// echo $_SESSION['qnty'];?></span></div>
+            
+            </div>
+
+
+            
+        </a>-->
+
+
+
+
+
+
+<!-- cart design adjust krrahun -->
 
  <a  href="javascript:void(0);" class="dropdown-toggle lnk-cart" data-toggle="dropdown" >
                                 <div class="items-cart-inner">
@@ -289,7 +443,23 @@ if(!empty($_SESSION['cart'])){
                             </a>
  
 
-  
+  <!-- 
+                <div class="total-price-basket">
+                    <span class="lbl"> My cart -</span>
+                     
+                    <span class="total-price">
+                        <span class="sign">PKR.</span>
+                        <span class="value">00.00</span>
+                    </span>
+                </div>
+              <div class="basket">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+               </div>
+               
+                <div class="basket-item-count"><span class="count">0</span></div>
+            
+            </div>
+        </a>  -->
         <ul class="dropdown-menu">
         
     
