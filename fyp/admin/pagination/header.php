@@ -48,7 +48,7 @@ body {
 </head>
 <body>
 
-<nav class="navbar navbar-inverse" style="background-color: #43870c">
+<nav class="navbar navbar-inverse" style="background-color: #43870c; position: fixed; width: 100%; z-index:100;">
   <div class="container-fluid" style="  height: 46px; ">
     <div class="navbar-header"  >
        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"  >
