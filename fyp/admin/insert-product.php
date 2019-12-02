@@ -55,7 +55,7 @@ if(isset($_POST['ProductSubmit'])) {
 <?php include('include/header.php');?>
 <?php include('include/sidemenu.php');?> 
 
-<br><br>
+<br><br><br><br><br>
   <div class="main">
 <form class="form-horizontal" method="POST" action="insert-product.php" enctype="multipart/form-data" >
  
