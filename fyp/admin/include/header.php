@@ -58,7 +58,7 @@ color: #818181;
 </head>
   <body>
 
-<nav class="navbar navbar-inverse" style="background-color: #43870c">
+<nav class="navbar navbar-inverse" style="background-color: #43870c; width: 100%; position: fixed;  z-index:100;">
   <div class="container-fluid">
     <div class="navbar-header" style="padding: 3px;" >
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"  >
