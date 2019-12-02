@@ -17,17 +17,16 @@
 	 	<?php include('pagination/header.php');?> 
 	 	<?php include('pagination/sidemenu.php');?>
 
-		
- 
+  
  <!--<body class="bg-info">
 <div class="container"> 
 	<div class="row justify-content-center">
 		<div class="col-md-10 bg-light rounded my-2 py-2"> -->
-			 
-	  <div class="col-sm-10"style="float: right; " >
+			 <br><br><br><br>
+	  <div class="col-md-10"style=" margin-left:  270px;  " > 
 
 								<table class="table table-bordered" style="font-size: 14px;"> 
-									<thead class="thead-dark">
+									<thead class="thead-dark">  
 				<tr>
 					<th>#</th>
 					<th >Product Name</th>
@@ -43,7 +42,7 @@
 		  <tbody>
 		  	<?php 
 		  	   include('include/db.php');
-		  	   $sql = "select products.*,category.name,brands.brand_name from products join category on category.id=products.categorys_id join brands on brands.brand_id=products.brands_id";
+		  	   $sql = "SELECT products.*,category.name,brands.brand_name from products join category on category.id=products.categorys_id join brands on brands.brand_id=products.brands_id";
 		  	   $res=$conn->query($sql);
 		  	   $i = 0;
 		  	     while ($row=$res->fetch_assoc()){
