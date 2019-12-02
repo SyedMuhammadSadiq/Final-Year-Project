@@ -45,7 +45,7 @@ body {
   
   background-color: #43870c;
   overflow-x: hidden;
-   position: absolute;
+   position: fixed;
   margin-top: 70px;
 }
 
