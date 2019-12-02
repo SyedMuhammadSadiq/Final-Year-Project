@@ -118,10 +118,10 @@ else{
             
                          
                         <div class="table-responsive" style="margin-top:2%;">
-                            <form method="post">
+                            <form method="post" name="cart">
                                 <table cellspacing="0" class=
                                 "table table-striped table-bordered table-hover"
-                                id="example" style="font-size:12px">
+                                id="example" style="font-size:14px">
 
 
 
@@ -142,14 +142,15 @@ else{
                                         <tr>
                                              
                                             <th  width="50px">#</th>
-                                            <th  width="190px">Image</th>
-                                            <th  width="120px">Product Name</th>
-                                            <th width="170px">Quantity</th>
+                                            <th  width="90px">Image</th>
+                                            <th  width="190px">Product Name</th>
+                                            <th width="80px">Quantity</th>
                                             <th width="100px">Price Per Unit</th>
-                                            <th width="200px">Total Amount</th>
+                                            <th width="140px">Total Amount</th>
                                             <th width="50px">Payment Method</th>
                                             <th width="50px">Order Date</th>
                                             <th width="50px">Action</th>
+
 
 
 
@@ -161,18 +162,19 @@ else{
 <?php $query=mysqli_query($conn,"SELECT products.image as pimage,products.name as pname,products.id as pid,orders.productId as opid,orders.quantity as qty,products.price as pprice,orders.paymentMethod as paym,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.userId='".$_SESSION['id']."' and orders.paymentMethod is not null");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
-{
+{ 
 ?>
-                <tr>
+                <tr >
                     <td><?php echo $cnt;?></td>
                     <td class="cart-image">
                         <a  href="detail.html">
-                            <img src="admin/product_images/<?php echo $row['pid'];?>/<?php echo $row['pimage'];?>" alt="" width="84" height="146">
+                            <!--<img src="admin/product_images/<?php //echo $row['pid'];?>/<?php //echo $row['pimage'];?>" alt="" width="84" height="146">--> 
+                            <img src="admin/product_images/<?php echo $row['pimage'] ?>" width="84" height="90"/>
                         </a>
                     </td>
                     <td >
-                        <h4 ><a href="product-details.php?pid=<?php echo $row['opid'];?>">
-                        <?php echo $row['pname'];?></a></h4>
+                         <a href="product-details.php?pid=<?php echo $row['opid'];?>">
+                        <b><?php echo $row['pname'];?></b></a> 
                         
                         
                     </td>
@@ -184,11 +186,27 @@ while($row=mysqli_fetch_array($query))
                     <td class="cart-product-sub-total"><?php echo $row['paym']; ?>  </td>
                     <td class="cart-product-sub-total"><?php echo $row['odate']; ?>  </td>
                     
+                 <!--   <td><a href="javascript:void(0);" onClick="popUpWindow('track-order.php?oid=<?php// echo $row['orderid'];?>');" title="Track order">Track</td>-->
                     <td>
- <a href="javascript:void(0);" onClick="popUpWindow('track-order.php?oid=<?php echo $row['orderid'];?>');" title="Track order">
-                    Track</td>
+                      <ul class="nav navbar-nav" id="menu">
+                        
+                        <li><a href="track-order.php?oid=<?php echo $row['orderid'];?>" data-toggle="modal" data-target="#theModal">Track</a>
+                        </li>
+                      </ul>
+                      <div id="theModal" class="modal fade text-center">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                          </div>
+                        </div>
+                      </div>
+                  </td>
+
+
+
+
+
                 </tr>
-<?php $cnt=$cnt+1;} ?>
+<?php $cnt=$cnt+1;}  ?>
             
  
 
