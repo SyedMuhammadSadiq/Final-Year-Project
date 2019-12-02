@@ -27,7 +27,7 @@ body {
   
   background-color: #43870c;
   overflow-x: hidden;
-   position: absolute;
+   position: fixed;
   margin-top: 70px;
 }
 
@@ -65,7 +65,7 @@ color: #080807
  
  <br> 
  
-  
+                    
   
 <a  class="collapse" data-toggle="collapse"    href="#togglePages"  style=" word-spacing: 5px ;" >
 Order Management 
