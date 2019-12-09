@@ -91,7 +91,7 @@
 
                             
                            <?php if (isset($_SESSION['user'])) { ?>
-                                <li><a href="customer/my_account.php"><i class="icon fa fa-user"></i>My Account</a></li>
+                                <li><a href="my_account.php"><i class="icon fa fa-user"></i>My Account</a></li>
                                 <li><a href="my-cart.php"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                                 <li><a href="javascript:void(0);"><i class="icon fa fa-shopping-cart"></i>Order History</a></li>
                                 <li><a href="javascript:void(0);" onclick="logout()"><i class="fa fa-power-off"></i>&nbsp;Logout</a></li>
