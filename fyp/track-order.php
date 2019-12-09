@@ -27,7 +27,7 @@ $oid=$_GET['oid'];
           <b>Order Id :</b> <b><?php echo $oid;?></b>
         </div>
  <?php 
-$ret = mysqli_query($conn,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'");
+$ret = mysqli_query($conn,"SELECT * FROM ordertrackhistory WHERE uniqueId='$oid'");
 $num=mysqli_num_rows($ret);
 if($num>0)
 {
@@ -58,7 +58,7 @@ while($row=mysqli_fetch_array($ret))
    </tr>
    <?php  }
 $st='Delivered';
-   $rt = mysqli_query($conn,"SELECT * FROM orders WHERE id='$oid'");
+   $rt = mysqli_query($conn,"SELECT * FROM orders WHERE uniqueId='$oid'");
      while($num=mysqli_fetch_array($rt))
      {
      $currrentSt=$num['orderStatus'];
@@ -77,4 +77,5 @@ $st='Delivered';
 
 </body>
 </html>
- 
+
+
