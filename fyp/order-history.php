@@ -142,14 +142,15 @@ else{
                                         <tr>
                                              
                                             <th  width="50px">#</th>
-                                            <th  width="90px">Image</th>
+                                           <!-- <th  width="90px">Image</th>
                                             <th  width="190px">Product Name</th>
                                             <th width="80px">Quantity</th>
                                             <th width="100px">Price Per Unit</th>
-                                            <th width="140px">Total Amount</th>
+                                            <th width="140px">Total Amount</th> -->
                                             <th width="50px">Payment Method</th>
                                             <th width="50px">Order Date</th>
-                                            <th width="50px">Action</th>
+                                            <th width="60px">View Order</th>
+                                            <th width="40px">Action</th>
 
 
 
@@ -159,38 +160,48 @@ else{
                                     </thead>
                                     <tbody>
 
-<?php $query=mysqli_query($conn,"SELECT products.image as pimage,products.name as pname,products.id as pid,orders.productId as opid,orders.quantity as qty,products.price as pprice,orders.paymentMethod as paym,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.userId='".$_SESSION['id']."' and orders.paymentMethod is not null");
+<?php
+ $query=mysqli_query($conn,"SELECT products.image as pimage,products.name as pname,products.id as pid,orders.productId as opid,orders.quantity as qty,products.price as pprice,orders.paymentMethod as paym,orders.orderDate as odate,orders.id as orderid,orders.uniqueId as id from orders join products on orders.productId=products.id where orders.userId='".$_SESSION['id']."' and orders.paymentMethod is not null GROUP BY id ORDER BY odate DESC");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 { 
 ?>
                 <tr >
                     <td><?php echo $cnt;?></td>
-                    <td class="cart-image">
+                   <!-- <td class="cart-image">
                         <a  href="detail.html">
-                            <!--<img src="admin/product_images/<?php //echo $row['pid'];?>/<?php //echo $row['pimage'];?>" alt="" width="84" height="146">--> 
-                            <img src="admin/product_images/<?php echo $row['pimage'] ?>" width="84" height="90"/>
+                             //<img src="admin/product_images/<?php //echo $row['pid'];?>/<?php //echo $row['pimage'];?>" alt="" width="84" height="146">  
+                            <img src="admin/product_images/<?php //echo $row['pimage'] ?>" width="84" height="90"/>
                         </a>
                     </td>
                     <td >
-                         <a href="product-details.php?pid=<?php echo $row['opid'];?>">
-                        <b><?php echo $row['pname'];?></b></a> 
+                         <a href="product-details.php?pid=<?php //echo $row['opid'];?>">
+                        <b><?php //echo $row['pname'];?></b></a> 
                         
                         
                     </td>
                     <td >
-                        <?php echo $qty=$row['qty']; ?>   
+                        <?php //echo $qty=$row['qty']; ?>   
                     </td>
-                    <td ><?php echo $price=$row['pprice']; ?>  </td>
-                     <td ><?php echo ($qty*$price);?></td>
-                    <td class="cart-product-sub-total"><?php echo $row['paym']; ?>  </td>
+                    <td ><?php //echo $price=$row['pprice']; ?>  </td>
+                     <td ><?php //echo ($qty*$price);?></td>-->
+                    <td class="cart-product-sub-total"><?php echo $row['paym']; ?>  </td> 
                     <td class="cart-product-sub-total"><?php echo $row['odate']; ?>  </td>
                     
                  <!--   <td><a href="javascript:void(0);" onClick="popUpWindow('track-order.php?oid=<?php// echo $row['orderid'];?>');" title="Track order">Track</td>-->
+                    <td>  <ul class="nav navbar-nav" id="menu">
+     <li><a href="view_order.php?oid=<?php echo $row['id'];?>" data-toggle="modal" data-target="#theModal">View Order</a></li>
+ </ul>
+  <div id="theModal" class="modal fade text-center">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div> </td>
                     <td>
                       <ul class="nav navbar-nav" id="menu">
                         
-                        <li><a href="track-order.php?oid=<?php echo $row['orderid'];?>" data-toggle="modal" data-target="#theModal">Track</a>
+                        <li><a href="track-order.php?oid=<?php echo $row['id'];?>" data-toggle="modal" data-target="#theModal">Track</a>
                         </li>
                       </ul>
                       <div id="theModal" class="modal fade text-center">
@@ -238,3 +249,11 @@ while($row=mysqli_fetch_array($query))
 <?php include('layouts/footer.php'); ?>
 </body></html>
 <?php } ?>
+
+
+
+<script type="text/javascript">
+$('#theModal').on('hidden.bs.modal', function () { 
+    location.reload();
+});
+ </script>
